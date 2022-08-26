@@ -5,7 +5,7 @@
 }
 .container {
   max-width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 50px);
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -42,4 +42,18 @@ body {
 }
 button:hover {
   background-color: #56697b;
+}
+.header {
+  background-color: #577685;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.header input {
+  margin: 0 5px;
+}
+.header label {
+  color: white;
 }

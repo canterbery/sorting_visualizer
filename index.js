@@ -1,10 +1,19 @@
+import { quickSort } from "./quickSort.js";
 let randomize_array = document.getElementById("randomize_array_btn");
 let sort_array = document.getElementById("sort_array_btn");
 let bars_container = document.getElementById("bars_container");
+let quick = document.getElementById("quickSort");
+let bubble = document.getElementById("bubbleSort");
 let minRange = 1;
-let maxRange = 100;
-let numOfBars = 100;
-let heightFactor = 6.5;
+let maxRange = Math.floor(
+  document.getElementById("container").clientWidth / 14
+);
+
+let numOfBars = Math.floor(
+  document.getElementById("container").clientWidth / 14
+);
+console.log(numOfBars);
+let heightFactor = 5.5;
 let unsortedArray = new Array(numOfBars);
 
 function randomNumberInRange(min, max) {
@@ -18,6 +27,16 @@ function createRandomArray() {
 
 document.addEventListener("DOMContentLoaded", function () {
   createRandomArray();
+  renderBars(unsortedArray);
+});
+quick.addEventListener("click", function () {
+  createRandomArray();
+  bars_container.innerHTML = "";
+  renderBars(unsortedArray);
+});
+bubble.addEventListener("click", function () {
+  createRandomArray();
+  bars_container.innerHTML = "";
   renderBars(unsortedArray);
 });
 
@@ -43,9 +62,9 @@ function sleep(ms) {
 async function bubbleSort(array) {
   let bars = document.getElementsByClassName("bar");
   for (let i = 0; i < array.length; i++) {
-    for (j = 0; j < array.length - 1 - i; j++) {
+    for (let j = 0; j < array.length - 1 - i; j++) {
       if (array[j] > array[j + 1]) {
-        for (k = 0; k < bars.length; k++) {
+        for (let k = 0; k < bars.length; k++) {
           if (k !== j && k !== j + 1) {
             bars[k].style.backgroundColor = "aqua";
           }
@@ -66,6 +85,15 @@ async function bubbleSort(array) {
 }
 
 sort_array.addEventListener("click", function () {
-  let sorted_array = bubbleSort(unsortedArray);
-  console.log(sorted_array);
+  let sortedArray = [];
+  if (quick.checked) {
+    sortedArray = quickSort(unsortedArray, 0, unsortedArray.length - 1);
+  }
+  if (bubble.checked) sortedArray = bubbleSort(unsortedArray);
+
+  console.log(sortedArray);
 });
+
+window.onresize = () => {
+  location.reload();
+};
