@@ -12,6 +12,6 @@ export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function randomNumberInRange(min, max) {
+export function randomNumberInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
