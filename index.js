@@ -1,5 +1,6 @@
 import { quickSort } from "./quickSort.js";
 import { heapSort } from "./heapSort.js";
+import { mergeSort } from "./mergeSort.js";
 import {
   heightFactor,
   minRange,
@@ -15,6 +16,7 @@ let bars_container = document.getElementById("bars_container");
 let quick = document.getElementById("quickSort");
 let bubble = document.getElementById("bubbleSort");
 let heap = document.getElementById("heapSort");
+let merge = document.getElementById("mergeSort");
 
 let unsortedArray = new Array(numOfBars);
 
@@ -24,24 +26,38 @@ function createRandomArray() {
   }
 }
 
+function reset() {
+  createRandomArray();
+  bars_container.innerHTML = "";
+  renderBars(unsortedArray);
+}
 document.addEventListener("DOMContentLoaded", function () {
   createRandomArray();
   renderBars(unsortedArray);
+  const algoritm = localStorage.getItem("algoritm");
+  if (algoritm) {
+    console.log(algoritm);
+    let radio = document.getElementById(algoritm);
+    radio.checked = true;
+  } else {
+    bubble.checked = true;
+  }
 });
 quick.addEventListener("click", function () {
-  createRandomArray();
-  bars_container.innerHTML = "";
-  renderBars(unsortedArray);
+  localStorage.setItem("algoritm", "quickSort");
+  location.reload();
 });
 bubble.addEventListener("click", function () {
-  createRandomArray();
-  bars_container.innerHTML = "";
-  renderBars(unsortedArray);
+  localStorage.setItem("algoritm", "bubbleSort");
+  location.reload();
 });
 heap.addEventListener("click", function () {
-  createRandomArray();
-  bars_container.innerHTML = "";
-  renderBars(unsortedArray);
+  localStorage.setItem("algoritm", "heapSort");
+  location.reload();
+});
+merge.addEventListener("click", function () {
+  localStorage.setItem("algoritm", "mergeSort");
+  location.reload();
 });
 
 function renderBars(array) {
@@ -54,9 +70,7 @@ function renderBars(array) {
 }
 
 randomize_array.addEventListener("click", function () {
-  createRandomArray();
-  bars_container.innerHTML = "";
-  renderBars(unsortedArray);
+  location.reload();
 });
 
 async function bubbleSort(array) {
@@ -92,8 +106,8 @@ sort_array.addEventListener("click", function () {
   if (bubble.checked) sortedArray = bubbleSort(unsortedArray);
 
   if (heap.checked) sortedArray = heapSort(unsortedArray);
-
-  console.log(sortedArray);
+  if (merge.checked)
+    sortedArray = mergeSort(unsortedArray, 0, unsortedArray.length - 1);
 });
 
 window.onresize = () => {

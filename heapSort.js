@@ -57,7 +57,7 @@ const heapify = async (heap, i, max) => {
 };
 
 const swap = async (arr, firstItemIndex, lastItemIndex) => {
-  await sleep(100);
+  await sleep(50);
   const temp = arr[firstItemIndex];
   arr[firstItemIndex] = arr[lastItemIndex];
   arr[lastItemIndex] = temp;
