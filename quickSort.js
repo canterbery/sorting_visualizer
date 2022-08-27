@@ -1,8 +1,6 @@
+import { heightFactor, sleep } from "./const.js";
+
 let bars = document.getElementsByClassName("bar");
-let heightFactor = 5.5;
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 async function swap(array, leftIndex, rightIndex) {
   await sleep(100);

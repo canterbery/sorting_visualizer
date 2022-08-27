@@ -1,24 +1,23 @@
 import { quickSort } from "./quickSort.js";
+import { heapSort } from "./heapSort.js";
+import {
+  heightFactor,
+  minRange,
+  maxRange,
+  numOfBars,
+  sleep,
+  randomNumberInRange,
+} from "./const.js";
+
 let randomize_array = document.getElementById("randomize_array_btn");
 let sort_array = document.getElementById("sort_array_btn");
 let bars_container = document.getElementById("bars_container");
 let quick = document.getElementById("quickSort");
 let bubble = document.getElementById("bubbleSort");
-let minRange = 1;
-let maxRange = Math.floor(
-  document.getElementById("container").clientWidth / 14
-);
+let heap = document.getElementById("heapSort");
 
-let numOfBars = Math.floor(
-  document.getElementById("container").clientWidth / 14
-);
-console.log(numOfBars);
-let heightFactor = 5.5;
 let unsortedArray = new Array(numOfBars);
 
-function randomNumberInRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 function createRandomArray() {
   for (let i = 0; i < unsortedArray.length; i++) {
     unsortedArray[i] = randomNumberInRange(minRange, maxRange);
@@ -39,6 +38,11 @@ bubble.addEventListener("click", function () {
   bars_container.innerHTML = "";
   renderBars(unsortedArray);
 });
+heap.addEventListener("click", function () {
+  createRandomArray();
+  bars_container.innerHTML = "";
+  renderBars(unsortedArray);
+});
 
 function renderBars(array) {
   for (let i = 0; i < array.length; i++) {
@@ -54,10 +58,6 @@ randomize_array.addEventListener("click", function () {
   bars_container.innerHTML = "";
   renderBars(unsortedArray);
 });
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 async function bubbleSort(array) {
   let bars = document.getElementsByClassName("bar");
@@ -90,6 +90,8 @@ sort_array.addEventListener("click", function () {
     sortedArray = quickSort(unsortedArray, 0, unsortedArray.length - 1);
   }
   if (bubble.checked) sortedArray = bubbleSort(unsortedArray);
+
+  if (heap.checked) sortedArray = heapSort(unsortedArray);
 
   console.log(sortedArray);
 });
