@@ -1,11 +1,11 @@
-export const heightFactor = 5.5;
+export const heightFactor = 4;
 export const minRange = 1;
 export const maxRange = Math.floor(
-  document.getElementById("container").clientWidth / 14
+  document.getElementById("container").clientWidth / 10
 );
 
 export const numOfBars = Math.floor(
-  document.getElementById("container").clientWidth / 14
+  document.getElementById("container").clientWidth / 10
 );
 
 export function sleep(ms) {
